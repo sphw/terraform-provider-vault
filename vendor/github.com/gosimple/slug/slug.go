@@ -66,6 +66,8 @@ func MakeLang(s string, lang string) (slug string) {
 		slug = SubstituteRune(slug, nlSub)
 	case "pl":
 		slug = SubstituteRune(slug, plSub)
+	case "tr":
+		slug = SubstituteRune(slug, trSub)
 	default: // fallback to "en" if lang not found
 		slug = SubstituteRune(slug, enSub)
 	}
@@ -78,7 +80,7 @@ func MakeLang(s string, lang string) (slug string) {
 	// Process all remaining symbols
 	slug = regexpNonAuthorizedChars.ReplaceAllString(slug, "-")
 	slug = regexpMultipleDashes.ReplaceAllString(slug, "-")
-	slug = strings.Trim(slug, "-")
+	slug = strings.Trim(slug, "-_")
 
 	if MaxLength > 0 {
 		slug = smartTruncate(slug)
